@@ -1,0 +1,73 @@
+# i3blocks config file
+command=~/.local/bin/statusbar/$BLOCK_NAME
+align=center
+separator=false
+color=#ffffff
+separator_block_width=20
+markup=pango
+
+#[mediaplayer]
+#command=playerctl metadata --format "{{ artist }} - {{ title }}"
+#interval=2
+#label=<span color="#a9e185"> </span>
+
+#[arch-update]
+#command=checkupdates | wc -l
+#interval=once
+#label=<span color="#1793D1"> </span>
+
+[bandwith]
+command=~/.local/bin/statusbar/bandwith
+interval=2
+INTERFACE=enp5s0
+
+[home]
+command=df -h /home | awk 'FNR==2{print $4}'
+interval=3
+label=<span color="#a9e185"> </span>
+
+#[root]
+#command=df -h / | awk 'FNR==2{print $4}'
+#interval=3
+#label=<span color="#ff79c6"> </span>
+
+#[cpu_usage]
+#command=~/.local/bin/statusbar/cpu
+#interval=2
+#label=<span color="#8be9fd"> </span>
+
+[cpu-temperature]
+command=~/.local/bin/statusbar/cpu
+interval=2
+#SENSOR_CHIP="jc42-i2c-0-1a"
+label=<span color="#8be9fd"> </span>
+
+[memory]
+command=~/.local/bin/statusbar/memory
+#command=free -h --si | awk 'FNR==2{ print $0 }' | awk '{ print $7 }'
+interval=2
+label=<span color="#a9e185"> </span>
+
+[volume]
+interval=once
+signal=10
+label=<span color="#ff79c6"> </span>
+
+[time]
+command=date '+%H:%M'
+interval=1
+label=<span color="#ffb86c"> </span>
+
+[date]
+command=date '+%d/%m/%Y'
+interval=60
+label=<span color="#8be9fd"> </span>
+
+#[shutdown_menu]
+#full_text=<span color="#a9e185"> </span>
+#command=~/.local/bin/statusbar/shutdown_menu
+#ROFI_TEXT=Menu:
+#ROFI_OPTIONS=-no-config -location 3 -yoffset 29 -width 5 -xoffset 5 -bw 0 -border 0 -theme ~/.config/rofi/menu.rasi
+#ENABLE_CONFIRMATIONS=true
+#LAUNCHER=rofi
+#LOCKSCRIPT=betterlockscreen -l dimblur
