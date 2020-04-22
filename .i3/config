@@ -36,6 +36,8 @@ font pango:$font_family $font_size
 # Workspace assignments
 #exec --no-startup-id i3-msg "workspace $ws1"
 assign [class="(?i)Firefox"]            $ws1
+assign [class="gnome-builder"]                $ws3
+assign [class="Glade"]                  $ws3
 assign [class="(?i)Thunderbird"]        $ws4
 assign [class="libreoffice"]            $ws5
 assign [class="(?i)Lutris"]             $ws7
