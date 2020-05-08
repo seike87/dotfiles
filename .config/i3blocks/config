@@ -21,6 +21,7 @@ interval=once
 command=~/.local/bin/statusbar/mediaplayer
 interval=5
 signal=10
+instance=lollypop
 
 [bandwith]
 command=~/.local/bin/statusbar/bandwith

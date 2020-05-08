@@ -80,6 +80,7 @@ bindsym $mod+Shift+m exec $email
 
 # Launcher
 bindsym $mod+space --release exec "rofi -combi-modi drun,window,ssh -show combi -modi combi"
+bindsym $mod+c exec --no-startup-id "rofi -show calc -modi calc -no-show-match -no-sort"
 
 # Explorer
 bindsym $mod+Shift+f exec $filemanager
@@ -188,7 +189,8 @@ mode "resize" {
 # Top bar
 bar {
 	i3bar_command i3bar -t
-	status_command i3blocks
+#	status_command i3blocks
+    status_command py3status -c /home/seike/.config/py3status/config
 #	mode dock
 	position top
 	colors {
@@ -203,7 +205,7 @@ bar {
             binding_mode        #229c56 #229c56 #ffffff
 }
 	font pango:$font_family $font_size
-	separator_symbol ""
+	separator_symbol "  "
 	height $bar_height
 #	tray_output primary
 	binding_mode_indicator yes

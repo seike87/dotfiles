@@ -1,0 +1,15 @@
+order += "lm_sensors"
+order += "clock"
+
+
+lm_sensors {
+    chips = ['coretemp-isa-0000']
+    format_chip = '[\?if=name=coretemp-isa-0000  ]'
+    format_chip += '{format_sensor}'
+    format_sensor = '{input}°C'
+    sensors = ['package*', 'temp*']
+}
+
+clock {
+	format_time = " %y/%m/%d   %H:%M"
+}
