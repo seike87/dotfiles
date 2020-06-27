@@ -1,6 +1,48 @@
+#order += "spotify"
+order += "net_rate"
+order += "disk /"
+order += "disk /run/media/seike/Vault"
+order += "cpu_usage"
+order += "sysdata"
 order += "lm_sensors"
 order += "clock"
 
+spotify {
+    button_next = 4
+    button_play_pause = 1
+    button_previous = 5
+    format = "{title} by {artist}"
+    format_down = ""
+}
+
+net_rate {
+	format_value = "[\?min_length=10 {value:.1f} {unit}]"
+	si_units = "True"
+	format = "{down}⇣⇡{up}"
+        interfaces_blacklist = "lo"
+}
+
+disk "/" {
+	prefix_type = decimal
+	#format = " ⛁ %percentage_used (U:%used, F:%free) "	
+    format = " %avail"
+}
+
+disk "/run/media/seike/Vault" {
+	prefix_type = decimal
+	#format = " ⛁ %percentage_used (U:%used, F:%free) "	
+    format = " %avail"
+}
+
+cpu_usage {
+        format = " %usage"
+        on_click 1 = 'exec --no-startup-id notify-send -t 5000 -i applications-development "$(~/.local/bin/scripts/proclist.sh)"'
+}
+
+sysdata {
+    format = '{mem_used}{mem_used_unit}'
+    on_click 1 = 'exec --no-startup-id notify-send -t 5000 -i applications-development "$(~/.local/bin/scripts/memorylist.sh)"'
+}
 
 lm_sensors {
     chips = ['coretemp-isa-0000']
@@ -11,5 +53,5 @@ lm_sensors {
 }
 
 clock {
-	format_time = " %y/%m/%d   %H:%M"
+	format_time = " %d/%m/%y   %H:%M"
 }

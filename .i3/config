@@ -54,7 +54,7 @@ assign [class="Lxinput"]                $ws10
 assign [class="Lxrandr"]                $ws10
 assign [class="Lxtask"]                 $ws10
 
-for_window [class="(?i)Spotify"] move container to workspace $ws7
+for_window [class="(?i)Spotify"] move container to workspace $ws6
 
 #Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
