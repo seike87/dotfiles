@@ -62,7 +62,7 @@ exec --no-startup-id nitrogen --restore; sleep1; compton -b
 exec --no-startup-id nextcloud
 exec --no-startup-id pamac-tray
 exec --no-startup-id nm-applet
-exec --no-startup-id volumeicon
+#exec --no-startup-id volumeicon
 #exec --no-startup-id pulseaudio --start
 #exec --no-startup-id pa-applet
 exec --no-startup-id xautolock -time 10 -locker blurlock
@@ -190,7 +190,15 @@ mode "resize" {
 bar {
 	i3bar_command i3bar -t
 #	status_command i3blocks
-    status_command py3status -c /home/seike/.config/py3status/config
+# status_command py3status -c /home/seike/.config/py3status/config
+
+status_command ~/Repos/bumblebee-status/bumblebee-status \
+    -m network_traffic disk:root disk:vault cpu memory pasink date time \
+		-p disk.format="{left}" root.path=/ vault.path=/run/media/seike/Vault memory.format="{used}" time.format="%H:%M" date.format="%d/%m/%Y" \
+    -t iceberg-dark-powerline
+
+
+
 #	mode dock
 	position top
 	colors {

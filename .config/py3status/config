@@ -1,7 +1,8 @@
 #order += "spotify"
 order += "net_rate"
-order += "disk /"
-order += "disk /run/media/seike/Vault"
+order += "group disk"
+#order += "disk /"
+#order += "disk /run/media/seike/Vault"
 order += "cpu_usage"
 order += "sysdata"
 order += "lm_sensors"
@@ -22,16 +23,20 @@ net_rate {
         interfaces_blacklist = "lo"
 }
 
-disk "/" {
-	prefix_type = decimal
-	#format = " ⛁ %percentage_used (U:%used, F:%free) "	
-    format = " %avail"
-}
-
-disk "/run/media/seike/Vault" {
-	prefix_type = decimal
-	#format = " ⛁ %percentage_used (U:%used, F:%free) "	
-    format = " %avail"
+group disk {
+    click_mode = "button"
+    format = "{output} {button}"
+    format_separator = '|'
+    frame disks {
+        disk "/" {
+	        prefix_type = decimal
+            format = " %avail"
+        }
+        disk "/run/media/seike/Vault" {
+	        prefix_type = decimal
+            format = " %avail"
+        }
+    }
 }
 
 cpu_usage {
@@ -45,11 +50,11 @@ sysdata {
 }
 
 lm_sensors {
-    chips = ['coretemp-isa-0000']
-    format_chip = '[\?if=name=coretemp-isa-0000  ]'
+    chips = ['k10temp*']
+    format_chip = '[\?if=name=k10temp*  ]'
     format_chip += '{format_sensor}'
     format_sensor = '{input}°C'
-    sensors = ['package*', 'temp*']
+    sensors = ['Tdie']
 }
 
 clock {
