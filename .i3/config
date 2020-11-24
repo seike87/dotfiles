@@ -21,10 +21,10 @@ set $ws9    "9:  General"
 set $ws10   "10:  Settings"
 
 # Variables
-set $bar_height 25
+set $bar_height 22
 set $font_family Hack Regular
 set $font_size 11
-set $floating_size 1500 1000
+set $floating_size 1024 786
 set $browser firefox
 set $terminal alacritty
 set $filemanager nautilus
@@ -58,14 +58,14 @@ for_window [class="(?i)Spotify"] move container to workspace $ws6
 
 #Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nitrogen --restore; sleep1; compton -b
+#exec --no-startup-id nitrogen --restore; sleep1; compton -b
 exec --no-startup-id nextcloud
 exec --no-startup-id pamac-tray
 exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
 #exec --no-startup-id pulseaudio --start
 #exec --no-startup-id pa-applet
-exec --no-startup-id xautolock -time 10 -locker blurlock
+exec --no-startup-id xautolock -time 10 -locker betterlockscreen -l
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 
@@ -77,10 +77,6 @@ bindsym $mod+Shift+w exec $browser
 
 #E-Mail
 bindsym $mod+Shift+m exec $email
-
-# Launcher
-bindsym $mod+space --release exec "rofi -combi-modi drun,window,ssh -show combi -modi combi"
-bindsym $mod+c exec --no-startup-id "rofi -show calc -modi calc -no-show-match -no-sort"
 
 # Explorer
 bindsym $mod+Shift+f exec $filemanager
@@ -110,9 +106,6 @@ bindsym $mod+m sticky toggle
 
 # Close window
 bindsym $mod+q kill
-
-#Lock window
-bindsym $mod+l exec --no-startup-id blurlock
 
 # Focus
 bindsym $mod+s focus mode_toggle
@@ -189,14 +182,10 @@ mode "resize" {
 # Top bar
 bar {
 	i3bar_command i3bar -t
-#	status_command i3blocks
-# status_command py3status -c /home/seike/.config/py3status/config
-
-status_command ~/Repos/bumblebee-status/bumblebee-status \
-    -m network_traffic disk:root disk:vault cpu memory date time \
-		-p disk.format="{left}" root.path=/ vault.path=/run/media/seike/Vault memory.format="{used}" time.format="%H:%M" date.format="%d/%m/%Y" \
-    -t iceberg-dark-powerline
-
+  status_command ~/Repos/bumblebee-status/bumblebee-status \
+      -m network_traffic disk:root disk:vault cpu memory date time \
+	    -p disk.format="{left}" root.path=/ vault.path=/run/media/seike/Vault memory.format="{used}" time.format="%H:%M" date.format="%d/%m/%Y" \
+      -t nord-powerline
 
 
 #	mode dock
@@ -219,7 +208,6 @@ status_command ~/Repos/bumblebee-status/bumblebee-status \
 	binding_mode_indicator yes
 #	strip_workspace_numbers yes
 }
-
 
 bindsym $mod+b bar mode toggle
 
@@ -245,16 +233,25 @@ gaps outer 0
 bindsym $mod+plus gaps outer current plus 10
 bindsym $mod+minus gaps outer current minus 10
 
+###############################################################################
+####                    Custom Scripts and Functions                       ####
+###############################################################################
+
+# Launcher
+bindsym $mod+space --release exec "rofi -combi-modi drun,window,ssh -show combi -show-icons -modi combi"
+bindsym $mod+c exec --no-startup-id "rofi -show calc -modi calc -no-show-match -no-sort"
+
+# Wallpaper
+exec feh --bg-fill ~/Pictures/Wallpaper/doubleexposure.jpg
+
+# Lock Screen
+bindsym $mod+l exec betterlockscreen -u ~/Pictures/Wallpaper/doubleexposure.jpg -l blur
+
 # Screenshot
-bindsym Print exec --no-startup-id ~/Scripts/screenshot_select.sh
-bindsym Shift+Print exec --no-startup-id ~/Scripts/screenshot_save.sh
+bindsym Print exec scrot -q 100 '%S:%M:%H_%Y-%m-%d_$wx$h.png' -e 'mv $f ~/Pictures/Screenshots/ && dunstify "Screenshot Captured" "File : ~/Pictures/Screenshots/$f"'
 
 # Wallpaper
 #exec --no-startup-id ~/.fehbg
-
-# Brightness
-#bindsym XF86MonBrightnessUp exec --no-startup-id ~/Scripts/brightness_up.sh
-#bindsym XF86MonBrightnessDown exec --no-startup-id ~/Scripts/brightness_down.sh
 
 # Audio
 #bindsym XF86AudioRaiseVolume exec --no-startup-id ~/Scripts/volume_up.sh
@@ -271,6 +268,3 @@ bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 
 # Spotify song launcher
 #bindsym $mod+g exec --no-startup-id ~/Scripts/spotify_menu.sh
-
-# Welcome
-#exec aplay ~/Music/Sounds/statethybidding.wav

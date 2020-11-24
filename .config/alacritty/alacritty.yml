@@ -1,135 +1,93 @@
-#     _    _                 _ _____ _______   __
-#    / \  | | __ _  ___ _ __(_)_   _|_   _\ \ / /
-#   / _ \ | |/ _` |/ __| '__| | | |   | |  \ V /
-#  / ___ \| | (_| | (__| |  | | | |   | |   | |
-# /_/   \_\_|\__,_|\___|_|  |_| |_|   |_|   |_|
-#
-# See this wiki page for more info:
-# https://github.com/jwilm/alacritty/wiki
+# Colors (Nord)
+colors:
+  # Default colors
+  primary:
+    background: "#2E3440"
+    foreground: "#D8DEE9"
 
-env:
-  TERM: xterm-256color
+  # Normal colors
+  normal:
+    black: "#3B4252"
+    red: "#BF616A"
+    green: "#A3BE8C"
+    yellow: "#EBCB8B"
+    blue: "#81A1C1"
+    magenta: "#B48EAD"
+    cyan: "#88C0D0"
+    white: "#E5E9F0"
 
-# Window configurations
-window:
-  dimensions:
-    columns: 0
-    lines: 0
+  # Bright colors
+  bright:
+    black: "#4C566A"
+    red: "#BF616A"
+    green: "#A3BE8C"
+    yellow: "#EBCB8B"
+    blue: "#81A1C1"
+    magenta: "#B48EAD"
+    cyan: "#8FBCBB"
+    white: "#ECEFF4"
 
-  padding:
-    x: 0
-    y: 0
+background_opacity: 1.0
 
-  decorations: full
-
-scrolling:
-  multiplier: 1
-
-# Font configurations
 font:
   normal:
-    family: Hack
+    family: "Hack"
     style: Regular
-
   bold:
-    family: Hack
+    family: "Hack"
     style: Bold
-
   italic:
-    family: Hack
+    family: "Hack"
     style: Italic
+  bold_italic:
+    family: "Hack"
+    style: Bold Italic
 
+  # Point size
   size: 11.0
 
   offset:
     x: 0
     y: 0
 
-  glyph_offset:
-    x: 0
-    y: 0
+window:
+  padding:
+    x: 14
+    y: 4
 
-  scale_with_dpi: true
+scrolling:
+  # Maximum number of lines in the scrollback buffer.
+  # Specifying '0' will disable scrolling.
+  history: 10000
 
-  use_thin_strokes: false
+  # Number of lines the viewport will move for every line scrolled when
+  # scrollback is enabled (history > 0).
+  multiplier: 10
 
+# If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 
-colors:
-  # Default colors
-  primary:
-    background: '#333333'
-    foreground: '#F2F2F2'
-
-  # Normal colors
-  normal:
-    black:   '#333333'
-    red:     '#CC0000'
-    green:   '#4E9A06'
-    yellow:  '#C4A000'
-    blue:    '#3465A4'
-    magenta: '#75507B'
-    cyan:    '#06989A'
-    white:   '#D3D7CF'
-
-  # Bright colors
-  bright:
-    black:   '#88807C'
-    red:     '#F15D22'
-    green:   '#73C48F'
-    yellow:  '#FFCE51'
-    blue:    '#48B9C7'
-    magenta: '#AD7FA8'
-    cyan:    '#34E2E2'
-    white:   '#EEEEEC'
-
-# Visual bell
-bell:
-  animation: EaseOutExpo
-  duration: 0
-
-background_opacity: 1.0
-
 selection:
-  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+  semantic_escape_chars: ',│`|:"'' ()[]{}<>'
+
+  # When set to `true`, selected text will be copied to both the primary and
+  # the selection clipboard. Otherwise, it will only be copied to the selection
+  # clipboard.
   save_to_clipboard: true
 
-mouse_bindings:
-  - { mouse: Middle, action: PasteSelection }
-
-mouse:
-  double_click: { threshold: 300 }
-  triple_click: { threshold: 300 }
-  faux_scrolling_lines: 1
-  hide_when_typing: false
-
-cursor:
-  style: Block
-  unfocused_hollow: true
+# Live config reload (changes require restart)
+live_config_reload: true
 
 window.dynamic_title: true
 
-live_config_reload: true
-
-shell:
-  program: /usr/bin/zsh
-
 key_bindings:
-  - { key: Y,        mods: Control, action: Paste                        }
-  - { key: W,        mods: Alt,     action: Copy                         }
-  - { key: Insert,   mods: Shift,         action: PasteSelection   }
-  - { key: Key0,     mods: Control,       action: ResetFontSize    }
-  - { key: Equals,   mods: Control,       action: IncreaseFontSize }
-  - { key: Add,      mods: Control,       action: IncreaseFontSize }
-  - { key: Subtract, mods: Control,       action: DecreaseFontSize }
-  - { key: Minus,    mods: Control,       action: DecreaseFontSize }
-  - { key: Return,   mods: Alt,           action: ToggleFullscreen }
-  - { key: Paste,                    action: Paste                            }
-  - { key: Copy,                     action: Copy                             }
-  - { key: L,         mods: Control, action: ClearLogNotice                   }
-  - { key: L,         mods: Control, chars: "\x0c"                            }
-  - { key: PageUp,    mods: Shift,   action: ScrollPageUp,   mode: ~Alt       }
-  - { key: PageDown,  mods: Shift,   action: ScrollPageDown, mode: ~Alt       }
-  - { key: Home,      mods: Shift,   action: ScrollToTop,    mode: ~Alt       }
-  - { key: End,       mods: Shift,   action: ScrollToBottom, mode: ~Alt       }
+  - { key: V, mods: Control|Shift, action: Paste }
+  - { key: C, mods: Control|Shift, action: Copy }
+  - { key: Key0, mods: Control, action: ResetFontSize }
+  - { key: Equals, mods: Control, action: IncreaseFontSize }
+  - { key: Add, mods: Control, action: IncreaseFontSize }
+  - { key: Subtract, mods: Control, action: DecreaseFontSize }
+  - { key: Minus, mods: Control, action: DecreaseFontSize }
+  - { key: Right, mods: Control, chars: "\x1BF" }
+  - { key: Left, mods: Control, chars: "\x1BB" }
 
