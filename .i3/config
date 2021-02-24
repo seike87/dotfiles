@@ -36,7 +36,7 @@ font pango:$font_family $font_size
 # Workspace assignments
 #exec --no-startup-id i3-msg "workspace $ws1"
 assign [class="(?i)Firefox"]            $ws1
-assign [class="gnome-builder"]                $ws3
+assign [class="gnome-builder"]          $ws3
 assign [class="Glade"]                  $ws3
 assign [class="(?i)Thunderbird"]        $ws4
 assign [class="libreoffice"]            $ws5
@@ -65,7 +65,8 @@ exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
 #exec --no-startup-id pulseaudio --start
 #exec --no-startup-id pa-applet
-exec --no-startup-id xautolock -time 10 -locker betterlockscreen -l
+#exec --no-startup-id xautolock -time 10 -locker betterlockscreen -l
+exec --no-startup-id xautolock -locker "~/.local/bin/scripts/i3lock_rm.sh" -time 10 -detectsleep -notify 10
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 
@@ -90,6 +91,7 @@ for_window [class="Manjaro Settings Manager"]   floating enable border normal
 for_window [class="File-roller"]                floating enable
 for_window [class="Galculator"]                 floating enable
 for_window [class="GParted"]                    floating enable border normal
+for_window [class="pavucontrol"]                floating enable border normal 
 
 # Change splitting direction
 bindsym $mod+a split toggle
@@ -183,8 +185,9 @@ mode "resize" {
 bar {
 	i3bar_command i3bar -t
   status_command ~/Repos/bumblebee-status/bumblebee-status \
-      -m network_traffic disk:root disk:vault cpu memory date time \
+      -m disk:root disk:vault cpu memory date time \
 	    -p disk.format="{left}" root.path=/ vault.path=/run/media/seike/Vault memory.format="{used}" time.format="%H:%M" date.format="%d/%m/%Y" \
+      -a disk:root disk:vault \
       -t nord-powerline
 
 
@@ -240,12 +243,15 @@ bindsym $mod+minus gaps outer current minus 10
 # Launcher
 bindsym $mod+space --release exec "rofi -combi-modi drun,window,ssh -show combi -show-icons -modi combi"
 bindsym $mod+c exec --no-startup-id "rofi -show calc -modi calc -no-show-match -no-sort"
+bindsym $mod+e exec --no-startup-id "rofi -show emoji -modi emoji"
 
 # Wallpaper
-exec feh --bg-fill ~/Pictures/Wallpaper/doubleexposure.jpg
+exec --no-startup-id feh --bg-fill ~/Pictures/Wallpaper/doubleexposure.jpg
 
 # Lock Screen
-bindsym $mod+l exec betterlockscreen -u ~/Pictures/Wallpaper/doubleexposure.jpg -l blur
+#bindsym $mod+l exec betterlockscreen -u ~/Pictures/Wallpaper/doubleexposure.jpg -l blur
+bindsym Pause exec --no-startup-id ~/.local/bin/scripts/i3lock_rm.sh
+
 
 # Screenshot
 bindsym Print exec scrot -q 100 '%S:%M:%H_%Y-%m-%d_$wx$h.png' -e 'mv $f ~/Pictures/Screenshots/ && dunstify "Screenshot Captured" "File : ~/Pictures/Screenshots/$f"'

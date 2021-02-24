@@ -1,0 +1,92 @@
+{
+  "position": "top", 
+  "height": 30,
+  "modules-left": ["sway/workspaces"],
+  "modules-right": ["disk", "disk#1", "disk#2", "cpu", "memory", "pulseaudio", "custom/date", "clock", "tray", "custom/power"],
+    // Modules configuration
+	
+  "sway/workspaces": {
+		"disable-scroll": true,
+		"all-outputs": true,
+		"format": "{icon}",
+	 	"persistent_workspaces": {
+	 		"1": [],
+	 		"2": [],
+	 		"3": [],
+	 		"4": [],
+	 		"5": [],
+	 		"6": [],
+	 		"7": [],
+	 		"8": [],
+	 		"9": [],
+	 		"10": []
+	},
+         	"format-icons": {
+             		"1": "󰋜",
+             		"2": "󰈹",
+             		"3": "󰠮",
+             		"4": "󰭹",
+             		"5": "󱓷",
+             		"6": "󱇧",
+             		"7": "󰊢",
+             		"8": "󰖲",
+             		"9": "󰕧",
+             		"10": "󰝚"
+         }
+     },
+	
+  "custom/date": {
+    		"format": "󰸗 {}",
+		"interval": 3600,
+		"exec": "/home/seike/Scripts/sway/waybar-date.sh"
+	},
+	"custom/power": {
+		"format": "󰐥",
+		"on-click": "/home/seike/Scripts/sway/waybar-power.sh"
+	},
+	"clock": {
+		"format": "󰅐 {:%H:%M}",
+        	"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        	"format-alt": "{:%Y-%m-%d}"
+	},
+  "disk": {
+        "format": " {percentage_used}%  ",
+        "tooltip": false,
+        "path": "/"
+  },
+  "disk#1": {
+        "format": " {percentage_used}% 󰋜",
+        "tooltip": false,
+        "path": "/home"
+  },
+  "disk#2": {
+        "format": " {percentage_used}% ",
+        "tooltip": false,
+        "path": "/run/media/seike/Vault"
+  },
+  "memory": {
+        "format": "{used:0.1f}G/{total:0.1f}G "
+  },
+  "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+  },
+	"pulseaudio": {
+		"format": "{icon}  {volume}%",
+        	"format-muted": "󰖁 Muted",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+  "tray": {
+    "icon-size": 14,
+    "spacing": 10
+  }
+}

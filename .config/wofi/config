@@ -1,0 +1,15 @@
+style=/home/seike/.config/wofi/style.css
+xoffset=660
+yoffset=275
+show=drun
+width=400
+height=200
+always_parse_args=true
+show_all=true
+print_command=true
+layer=overlay
+insensitive=true
+prompt=
+allow_images=true
+allow_markup=true
+term=alacritty

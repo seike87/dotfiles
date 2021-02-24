@@ -1,3 +1,6 @@
+env:
+  TERM: xterm-256color
+
 # Colors (Nord)
 colors:
   # Default colors
@@ -7,25 +10,25 @@ colors:
 
   # Normal colors
   normal:
-    black: "#3B4252"
-    red: "#BF616A"
-    green: "#A3BE8C"
-    yellow: "#EBCB8B"
-    blue: "#81A1C1"
-    magenta: "#B48EAD"
-    cyan: "#88C0D0"
-    white: "#E5E9F0"
+    black:      "#3B4252"
+    red:        "#BF616A"
+    green:      "#A3BE8C"
+    yellow:     "#EBCB8B"
+    blue:       "#81A1C1"
+    magenta:    "#B48EAD"
+    cyan:       "#88C0D0"
+    white:      "#E5E9F0"
 
   # Bright colors
   bright:
-    black: "#4C566A"
-    red: "#BF616A"
-    green: "#A3BE8C"
-    yellow: "#EBCB8B"
-    blue: "#81A1C1"
-    magenta: "#B48EAD"
-    cyan: "#8FBCBB"
-    white: "#ECEFF4"
+    black:      "#4C566A"
+    red:        "#BF616A"
+    green:      "#A3BE8C"
+    yellow:     "#EBCB8B"
+    blue:       "#81A1C1"
+    magenta:    "#B48EAD"
+    cyan:       "#8FBCBB"
+    white:      "#ECEFF4"
 
 background_opacity: 1.0
 
@@ -85,8 +88,8 @@ key_bindings:
   - { key: C, mods: Control|Shift, action: Copy }
   - { key: Key0, mods: Control, action: ResetFontSize }
   - { key: Equals, mods: Control, action: IncreaseFontSize }
-  - { key: Add, mods: Control, action: IncreaseFontSize }
-  - { key: Subtract, mods: Control, action: DecreaseFontSize }
+    #  - { key: Add, mods: Control, action: IncreaseFontSize }
+    #  - { key: Subtract, mods: Control, action: DecreaseFontSize }
   - { key: Minus, mods: Control, action: DecreaseFontSize }
   - { key: Right, mods: Control, chars: "\x1BF" }
   - { key: Left, mods: Control, chars: "\x1BB" }
