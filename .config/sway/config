@@ -3,7 +3,8 @@ exec udiskie
 exec mako
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id pamac-tray
-#exec --no-startup-id nextcloud
+exec nextcloud
+exec gammastep-indicator
 
 # Style
 font pango:monospace 12px 
