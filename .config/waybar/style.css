@@ -28,6 +28,11 @@ window#waybar {
     border-radius: 5px;
 }
 
+#workspaces button.urgent {
+    background-color: #bf616a;
+    border-radius: 5px;
+}
+
 #workspaces button:hover {
 	background-color: #5e81ac;
 	border-radius: 5px;

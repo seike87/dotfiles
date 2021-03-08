@@ -50,16 +50,19 @@
         	"format-alt": "{:%Y-%m-%d}"
 	},
   "disk": {
+        "interval": 30,
         "format": " {percentage_used}%  ",
         "tooltip": false,
         "path": "/"
   },
   "disk#1": {
+        "interval": 30,
         "format": " {percentage_used}% 󰋜",
         "tooltip": false,
         "path": "/home"
   },
   "disk#2": {
+        "interval": 30,
         "format": " {percentage_used}% ",
         "tooltip": false,
         "path": "/run/media/seike/Vault"

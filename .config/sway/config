@@ -3,7 +3,7 @@ exec udiskie
 exec mako
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id pamac-tray
-exec nextcloud
+exec --no-startup-id nextcloud
 exec gammastep-indicator
 
 # Style
@@ -46,12 +46,14 @@ assign [app_id="audacity"] 6
 ## Keyboard settings
 input type:keyboard {
       xkb_layout de
+      repeat_delay 330
+      repeat_rate 25
+      xkb_numlock enable
 }
 
-## Touchpad settings
-input "1739:52545:SYNA7DB5:01_06CB:CD41_Touchpad" {
+## Mouse settings
+input "1133:4123:Logitech_M705" {
        dwt enabled
-       tap enabled
        natural_scroll enabled
        middle_emulation enabled
    }
@@ -77,7 +79,7 @@ set $menu wofi --hide-scroll | xargs swaymsg exec --
 
 ## Output configuration
 # Default wallpaper 
-output * bg /home/seike/Pictures/Wallpaper/doubleexposure.jpg fill
+output * bg /home/seike/Pictures/Wallpaper/zgH.png fill
 
 # Behavior
   focus_follows_mouse yes
@@ -86,13 +88,29 @@ output * bg /home/seike/Pictures/Wallpaper/doubleexposure.jpg fill
 #
 # Example configuration:
 #
- exec swayidle -w \
-          timeout 300 'swaylock -f' \
-          before-sleep 'swaylock -f'
+# set custom swaylock command (swaylock-effects)
+set $lock swaylock --screenshots \
+      --clock \
+      --indicator \
+      --indicator-radius 100 \
+      --indicator-thickness 7 \
+      --effect-blur 7x5 \
+      --effect-vignette 0.5:0.5 \
+      --ring-color 39373b \
+      --key-hl-color 880033 \
+      --line-color 00000000 \
+      --inside-color 00000088 \
+      --separator-color 00000000 \
+      --grace 3 \
+      --fade-in 0.5 \
+      --effect-greyscale
 
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
+### Idle configuration
+exec swayidle -w \
+      timeout 600 '$lock &' \
+      timeout 900 'swaymsg "output * dpms off"' \
+      resume 'swaymsg "output * dpms on"' \
+      before-sleep '$lock'
 
 # Key bindings
 #
@@ -122,6 +140,8 @@ bindsym $mod+Shift+c reload
 
 # Exit sway (logs you out of your Wayland session)
 bindsym $mod+Shift+e exec swaynag -t custom -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+
 #
 # Moving around:
 #
