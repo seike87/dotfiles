@@ -79,7 +79,7 @@ set $menu wofi --hide-scroll | xargs swaymsg exec --
 
 ## Output configuration
 # Default wallpaper 
-output * bg /home/seike/Pictures/Wallpaper/zgH.png fill
+output * bg /home/seike/Pictures/Wallpaper/firetower.jpg fill
 
 # Behavior
   focus_follows_mouse yes
