@@ -44,7 +44,7 @@ assign [app_id="audacity"] 6
 # Keybindings
 
 ## Keyboard settings
-input type:keyboard {
+input "1130:17:HID_046a:0011" {
       xkb_layout de
       repeat_delay 330
       repeat_rate 25
@@ -76,6 +76,9 @@ set $term alacritty
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 set $menu wofi --hide-scroll | xargs swaymsg exec --
+
+# Open network chooser
+bindsym $mod+w exec ~/.local/bin/scripts/nmcli-rofi.sh
 
 ## Output configuration
 # Default wallpaper 
@@ -141,6 +144,8 @@ bindsym $mod+Shift+c reload
 # Exit sway (logs you out of your Wayland session)
 bindsym $mod+Shift+e exec swaynag -t custom -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
+# Use wlogout as a session menu:
+bindsym $mod+Shift+q exec wlogout
 
 #
 # Moving around:

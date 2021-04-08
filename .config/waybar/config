@@ -1,18 +1,37 @@
 {
-  "position": "top", 
-  "height": 30,
-  "modules-left": ["sway/workspaces"],
-  "modules-right": ["disk", "disk#1", "disk#2", "cpu", "memory", "pulseaudio", "clock", "tray", "custom/power"],
-    // Modules configuration
-	
+    // "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "height": 20, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    // Choose the order of the modules
+    "modules-left": ["sway/workspaces"],
+    // "modules-center": ["sway/window"],
+    "modules-right": ["disk",
+                      "disk#1",
+                      "disk#2", 
+//                    "network", 
+                      "cpu", 
+                      "memory",
+                      "pulseaudio",
+//                    "backlight", 
+//                    "battery", 
+//                    "battery#bat2", 
+                      "clock",
+                      "idle_inhibitor",
+                      "tray", 
+                      "custom/power"
+                    ],
+  
+// Modules configuration
+  
   "sway/workspaces": {
-		"disable-scroll": true,
-		"all-outputs": true,
-		"format": "{icon}",
-      "format-icons": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "format": "{icon}",
+     	"format-icons": {
         "1": "1:󰋜",
-        "2": "2:󰈹",
-        "3": "3:󰠮",
+     	  "2": "2:󰈹",
+     	  "3": "3:󰠮",
         "4": "4:󰭹",
         "5": "5:󱓷",
         "6": "6:󱇧",
@@ -20,64 +39,115 @@
         "8": "8:󰖲",
         "9": "9:󰕧",
         "10": "10:󰝚"
-         }
-     },
-	
-  "custom/date": {
-    		"format": "󰸗 {}",
-		"interval": 3600,
-		"exec": "/home/seike/Scripts/sway/waybar-date.sh"
-	},
-	"custom/power": {
-		"format": "󰐥",
-		"on-click": "/home/seike/Scripts/sway/waybar-power.sh"
-	},
-	"clock": {
+      }
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "custom/power": {
+		  "format": "󰐥",
+		  "on-click": "~/Scripts/sway/waybar-power.sh"
+	  },
+    "idle_inhibitor": {
+      "format": "{icon}",
+      "format-icons": {
+          "activated": "",
+          "deactivated": ""
+      }
+    },
+    "tray": {
+      "icon-size": 14,
+      "spacing": 10
+    },
+    "clock": {
 		"format": "󰅐 {:%H:%M}",
-        	"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        	"format-alt": "{:%Y-%m-%d}"
-	},
-  "disk": {
-        "interval": 30,
-        "format": " {percentage_used}%  ",
-        "tooltip": false,
-        "path": "/"
-  },
-  "disk#1": {
-        "interval": 30,
-        "format": " {percentage_used}% 󰋜",
-        "tooltip": false,
-        "path": "/home"
-  },
-  "disk#2": {
-        "interval": 30,
-        "format": " {percentage_used}% ",
-        "tooltip": false,
-        "path": "/run/media/seike/Vault"
-  },
-  "memory": {
-        "format": "{used:0.1f}G/{total:0.1f}G "
-  },
-  "cpu": {
+      "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+      "format-alt": "{:%Y-%m-%d}"
+	  },
+    "cpu": {
         "format": "{usage}% ",
         "tooltip": false
-  },
-	"pulseaudio": {
-		"format": "{icon}  {volume}%",
-        	"format-muted": "󰖁 Muted",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
-        "on-click": "pavucontrol"
     },
-  "tray": {
-    "icon-size": 14,
-    "spacing": 10
-  }
+    "memory": {
+        "format": "{used:0.1f}G "
+    },
+    "disk": {
+      "interval": 30,
+      "format": "{percentage_used}%  ",
+      "tooltip": false,
+      "path": "/"
+    },
+    "disk#1": {
+      "interval": 30,
+      "format": "{percentage_used}% 󰋜",
+      "tooltip": false,
+      "path": "/home"
+    },
+    "disk#2": {
+      "interval": 30,
+      "format": "{percentage_used}% ",
+      "tooltip": false,
+      "path": "/run/media/seike/Vault"
+    },
+    "temperature": {
+      // "thermal-zone": 2,
+      // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+      "critical-threshold": 80,
+      // "format-critical": "{temperatureC}°C {icon}",
+      "format": "{temperatureC}°C {icon}",
+      "format-icons": ["", "", ""]
+    },
+    "backlight": {
+      // "device": "acpi_video1",
+      "format": "{percent}% {icon}",
+      "format-icons": ["", ""],
+	    "on-scroll-up":"brightnessctl set +5% ",
+	    "on-scroll-down":"brightnessctl set 5%- "
+    },
+    "battery": {
+      "states": {
+          // "good": 95,
+          "warning": 30,
+          "critical": 15
+      },
+      "format": "{capacity}% {icon}",
+      "format-charging": "{capacity}% ",
+      "format-plugged": "{capacity}% ",
+      "format-alt": "{time} {icon}",
+      // "format-good": "", // An empty format will hide the module
+      // "format-full": "",
+      "format-icons": ["", "", "", "", ""]
+    },
+    "battery#bat2": {
+        "bat": "BAT2"
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+      "format-alt": "{essid} ({signalStrength}%) ",
+      "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+      "format-linked": "{ifname} (No IP) ",
+      "format-disconnected": "Disconnected ⚠",
+      "format-wifi": "{ifname}: {ipaddr}/{cidr}",
+	    "on-scroll-up":"bash .local/bin/scripts/wofi/netcon",
+	    "on-scroll-down":" bash .local/bin/scripts/wofi/netdiscon"
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+      "format": "{volume}% {icon} {format_source}",
+      "format-bluetooth": "{volume}% {icon} {format_source}",
+      "format-bluetooth-muted": " {icon} {format_source}",
+      "format-muted": "󰖁 {format_source}",
+      "format-source": "{volume}% ",
+      "format-source-muted": "",
+      "format-icons": {
+        "headphone": "",
+        "hands-free": "",
+        "headset": "",
+        "phone": "",
+        "portable": "",
+        "car": "",
+        "default": ["", "", ""]
+      },
+        "on-click": "pavucontrol"
+    }
 }
