@@ -67,13 +67,14 @@
     "cpu": {
         "format": "{usage}% ",
         "tooltip": false
+
     },
     "memory": {
         "format": "{used:0.1f}G "
     },
     "disk": {
       "interval": 30,
-      "format": "{percentage_used}%  ",
+      "format": "{percentage_used}% ",
       "tooltip": false,
       "path": "/"
     },
